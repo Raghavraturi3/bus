@@ -1,0 +1,290 @@
+@import 'leaflet/dist/leaflet.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - inspired by SmartBus orange theme */
+    --background: 39 100% 98%;
+    --foreground: 24 90% 15%;
+
+    --card: 39 100% 99%;
+    --card-foreground: 24 90% 15%;
+
+    --popover: 39 100% 99%;
+    --popover-foreground: 24 90% 15%;
+
+    /* Primary - warm orange like SmartBus */
+    --primary: 34 100% 60%;
+    --primary-foreground: 39 100% 98%;
+    --primary-glow: 34 100% 75%;
+
+    /* Secondary - complementary warm yellow */
+    --secondary: 45 100% 65%;
+    --secondary-foreground: 24 90% 15%;
+
+    /* Status colors for buses */
+    --status-active: 142 76% 36%;
+    --status-delayed: 48 96% 53%;
+    --status-inactive: 0 84% 60%;
+
+    /* Route colors */
+    --route-1: 220 91% 58%;
+    --route-2: 262 83% 58%;
+    --route-3: 342 75% 58%;
+    --route-4: 32 95% 58%;
+    --route-5: 173 58% 39%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 214 84% 56%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 92%;
+    --ring: 214 84% 56%;
+
+    --radius: 0.75rem;
+
+    /* Gradients - SmartBus inspired orange gradient */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(34 100% 60%) 0%, hsl(45 100% 65%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(var(--primary) / 0.1), 0 2px 4px -1px hsl(var(--primary) / 0.06);
+    --shadow-floating: 0 10px 25px -5px hsl(var(--primary) / 0.2), 0 10px 10px -5px hsl(var(--primary) / 0.04);
+    --shadow-glow: 0 0 30px hsl(var(--primary-glow) / 0.3);
+
+    /* Sidebar colors */
+    --sidebar-background: 210 25% 8%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 214 84% 56%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 25% 12%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 210 25% 15%;
+    --sidebar-ring: 214 84% 56%;
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    /* Dark mode - deeper transportation theme */
+    --background: 215 28% 8%;
+    --foreground: 210 20% 98%;
+
+    --card: 215 28% 10%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 215 28% 10%;
+    --popover-foreground: 210 20% 98%;
+
+    /* Primary - brighter blue for dark mode */
+    --primary: 214 84% 65%;
+    --primary-foreground: 215 28% 8%;
+    --primary-glow: 214 84% 80%;
+
+    /* Secondary - vibrant green */
+    --secondary: 158 64% 58%;
+    --secondary-foreground: 215 28% 8%;
+
+    /* Status colors for dark mode */
+    --status-active: 142 84% 47%;
+    --status-delayed: 48 96% 60%;
+    --status-inactive: 0 84% 65%;
+
+    /* Route colors - brighter for dark mode */
+    --route-1: 220 91% 68%;
+    --route-2: 262 83% 68%;
+    --route-3: 342 75% 68%;
+    --route-4: 32 95% 68%;
+    --route-5: 173 58% 49%;
+
+    --muted: 215 28% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 214 84% 65%;
+    --accent-foreground: 215 28% 8%;
+
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 28% 18%;
+    --input: 215 28% 15%;
+    --ring: 214 84% 65%;
+
+    /* Gradients for dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+
+    /* Enhanced shadows for dark mode */
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
+    --shadow-floating: 0 10px 25px -5px hsl(0 0% 0% / 0.5), 0 10px 10px -5px hsl(0 0% 0% / 0.3);
+    --shadow-glow: 0 0 30px hsl(var(--primary-glow) / 0.4);
+
+    /* Sidebar - even darker */
+    --sidebar-background: 215 32% 5%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 214 84% 65%;
+    --sidebar-primary-foreground: 215 32% 5%;
+    --sidebar-accent: 215 32% 8%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 215 32% 12%;
+    --sidebar-ring: 214 84% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/40;
+  }
+}
+
+@layer utilities {
+  /* Bus status indicators */
+  .status-active {
+    @apply bg-green-500/20 text-green-600 border-green-500/30;
+  }
+
+  .status-delayed {
+    @apply bg-yellow-500/20 text-yellow-600 border-yellow-500/30;
+  }
+
+  .status-inactive {
+    @apply bg-red-500/20 text-red-600 border-red-500/30;
+  }
+
+  /* Route colors */
+  .route-1 { @apply text-blue-600 bg-blue-50 border-blue-200; }
+  .route-2 { @apply text-purple-600 bg-purple-50 border-purple-200; }
+  .route-3 { @apply text-pink-600 bg-pink-50 border-pink-200; }
+  .route-4 { @apply text-orange-600 bg-orange-50 border-orange-200; }
+  .route-5 { @apply text-teal-600 bg-teal-50 border-teal-200; }
+
+  .dark .route-1 { @apply text-blue-400 bg-blue-950 border-blue-800; }
+  .dark .route-2 { @apply text-purple-400 bg-purple-950 border-purple-800; }
+  .dark .route-3 { @apply text-pink-400 bg-pink-950 border-pink-800; }
+  .dark .route-4 { @apply text-orange-400 bg-orange-950 border-orange-800; }
+  .dark .route-5 { @apply text-teal-400 bg-teal-950 border-teal-800; }
+
+  /* Animations */
+  .animate-marker-pulse {
+    animation: markerPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-card/80 backdrop-blur-md border border-border/50;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--primary)/0.3)];
+  }
+}
+
+@layer components {
+  /* Custom button variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-secondary text-primary-foreground 
+           px-8 py-4 rounded-xl font-semibold shadow-lg 
+           hover:shadow-xl hover:scale-105 transition-all duration-300
+           hover:shadow-[0_0_25px_hsl(var(--primary)/0.4)];
+  }
+
+  .btn-floating {
+    @apply bg-primary text-primary-foreground p-3 rounded-full shadow-lg
+           hover:shadow-xl hover:scale-110 transition-all duration-300
+           hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)];
+  }
+
+  /* Map styles */
+  .map-container {
+    @apply w-full h-full rounded-xl overflow-hidden shadow-lg;
+  }
+
+  /* Bus marker styles */
+  .bus-marker {
+    @apply w-8 h-8 rounded-full border-2 border-white shadow-lg
+           flex items-center justify-center text-white font-bold text-xs
+           transition-all duration-300 hover:scale-110;
+  }
+}
+
+@keyframes markerPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
