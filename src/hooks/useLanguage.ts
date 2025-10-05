@@ -12,8 +12,8 @@ interface Translations {
 const translations: Translations = {
   // Navigation
   'bus_tracking': { en: 'Bus Tracking', hi: 'बस ट्रैकिंग' },
-  'smart_bus_tracker': { en: 'Smart Bus Tracker', hi: 'स्मार्ट बस ट्रैकर' },
-  'dehradun_bus_pulse': { en: 'Dehradun Bus Pulse', hi: 'देहरादून बस पल्स' },
+  'Sarthi': { en: 'Saarthi', hi: 'सारथी' },
+  'Punjab_bus_pulse': { en: 'Punjab Bus Pulse', hi: 'पंजाब बस पल्स' },
   'real_time_tracking': { en: 'Real-time tracking', hi: 'रियल-टाइम ट्रैकिंग' },
   
   // Bus Status

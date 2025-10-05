@@ -16,6 +16,7 @@ export interface Bus {
   speed: number;
   driver: string;
   nextStop: string;
+  arrival: string;
   lastUpdated: Date;
   capacity: number;
   occupancy: number;
@@ -35,6 +36,7 @@ export interface Route {
   stops: BusStop[];
   totalDistance: number;
   estimatedTime: string;
+  arrival:string;
 }
 
 // Sample Dehradun routes and bus stops
@@ -42,12 +44,13 @@ export const dehradunRoutes: Route[] = [
   {
     id: "route-1",
     name: "Bathinda - Barnala",
-    code: "DTU-01",
+    code: "PNJ-01",
     color: "#3B82F6", // Blue
     startPoint: "Bathinda",
     endPoint: "Barnala",
     totalDistance: 64.3,
     estimatedTime: "1 hr 30 mins",
+    arrival:"11pm",
     stops: [
       { id: "stop-1", name: "Bathinda", lat: 30.20745447327828, lng: 74.93421752757521 },
       { id: "stop-2", name: "Bhucho Mandi", lat: 30.220316436224454, lng:  75.0837337227625 },
@@ -61,12 +64,13 @@ export const dehradunRoutes: Route[] = [
   {
     id: "route-2",  
     name: "Sangrur - Mansa",
-    code: "DTU-02",
+    code: "PNJ-02",
     color: "#8B5CF6", // Purple
     startPoint: "Rajpur Road",
     endPoint: "Mussoorie",
     totalDistance: 35.8,
     estimatedTime: "1.5 hours",
+    arrival:"11pm",
     stops: [
       { id: "stop-8", name: "Sangrur", lat: 30.24651216399327, lng: 75.84347223395416 },
       { id: "stop-9", name: "Sunam Udham Singh Wala", lat: 30.142681140244875, lng: 75.8079047177424 },
@@ -79,12 +83,13 @@ export const dehradunRoutes: Route[] = [
   {
     id: "route-3",
     name: "Hoshiarpur - Nawanshahr",
-    code: "DTU-03", 
+    code: "PNJ-03", 
     color: "#EC4899", // Pink
     startPoint: "Clement Town",
     endPoint: "Rishikesh",
     totalDistance: 28.5,
     estimatedTime: "1.2 hours",
+    arrival:"11pm",
     stops: [
       { id: "stop-14", name: "Hoshiarpur", lat: 31.505725241811504, lng: 75.88952009991718 },
       { id: "stop-15", name: "Chabbewal", lat: 31.44480062410503, lng: 75.99072081092953 },
@@ -97,12 +102,13 @@ export const dehradunRoutes: Route[] = [
   {
     id: "route-4",
     name: "Ludhiana - Jalandhar",
-    code: "DTU-04",
+    code: "PNJ-04",
     color: "#F59E0B", // Orange
     startPoint: "Premnagar",
     endPoint: "Dehradun University",
     totalDistance: 12.3,
     estimatedTime: "35 mins",
+    arrival:"11pm",
     stops: [
       { id: "stop-20", name: "Ludhiana", lat: 30.90880861979299, lng: 75.60524803079197 },
       { id: "stop-21", name: "Phillaur", lat: 31.01824969770126, lng: 75.79357661559503 },
@@ -114,12 +120,13 @@ export const dehradunRoutes: Route[] = [
   {
     id: "route-5",
     name: "Chandigarh - Ludhiana",
-    code: "DTU-05",
+    code: "PNJ-05",
     color: "#059669", // Teal
     startPoint: "Haridwar Road", 
     endPoint: "ONGC",
     totalDistance: 18.7,
     estimatedTime: "55 mins",
+    arrival:"11pm",
     stops: [
       { id: "stop-25", name: "Chandigarh", lat: 30.721323552507325, lng: 76.79138235819211 },
       { id: "stop-26", name: "Kharar", lat: 30.755632230264325, lng: 76.63357354684803 },
@@ -135,15 +142,16 @@ export const dehradunRoutes: Route[] = [
 export const dehradunBuses: Bus[] = [
   {
     id: "bus-1",
-    name: "Punjabi Lassi",
+    name: "Punjabi Express",
     code: "PNJ-01-A",
     routeId: "route-1", 
     lat: 30.20745447327828,
     lng: 74.93421752757521,
     status: "active",
     speed: 35,
-    driver: "Rajesh Kumar",
+    driver: "Harman Singh",
     nextStop: "Bhucho Mandi",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 45,
     occupancy: 32,
@@ -151,7 +159,7 @@ export const dehradunBuses: Bus[] = [
   },
   {
     id: "bus-2",
-    name: "Sahastra Link",
+    name: "Pind Express",
     code: "DH-01-B",
     routeId: "route-1",
     lat: 30.270956088835526, 
@@ -160,6 +168,7 @@ export const dehradunBuses: Bus[] = [
     speed: 15,
     driver: "Suresh Singh",
     nextStop: "Jethuke",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 45,
     occupancy: 38,
@@ -167,14 +176,15 @@ export const dehradunBuses: Bus[] = [
   },
   {
     id: "bus-3", 
-    name: "Hill Queen",
+    name: "Gabhru",
     code: "DH-02-A",
     routeId: "route-2",
     lat: 30.24651216399327, lng: 75.84347223395416,
     status: "active",
     speed: 28,
-    driver: "Prakash Negi",
+    driver: "Fateh Singh",
     nextStop: "Maldevta",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 50,
     occupancy: 28,
@@ -182,14 +192,15 @@ export const dehradunBuses: Bus[] = [
   },
   {
     id: "bus-4",
-    name: "Mussoorie Express",
+    name: "Balle Balle",
     code: "DH-02-B", 
     routeId: "route-2",
     lat: 30.063540870029325, lng: 75.53793151628003,
     status: "active",
     speed: 32,
-    driver: "Amit Thapa",
+    driver: "Arjun Singh",
     nextStop: "Kempty Fall Road",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 50,
     occupancy: 42,
@@ -197,7 +208,7 @@ export const dehradunBuses: Bus[] = [
   },
   {
     id: "bus-5",
-    name: "Ganga Express",
+    name: "Punjab Swift",
     code: "DH-03-A",
     routeId: "route-3",
     lat: 31.505725241811504, lng: 75.88952009991718,
@@ -205,29 +216,31 @@ export const dehradunBuses: Bus[] = [
     speed: 0,
     driver: "Mohan Lal",
     nextStop: "Survey of India",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 40,
     occupancy: 0,
-    fare: { baseFare: 15, perKmRate: 3 }
+    fare: { baseFare: 10, perKmRate: 2 }
   },
   {
     id: "bus-6",
-    name: "Airport Shuttle",
+    name: "Highway Sardaar",
     code: "DH-03-B",
     routeId: "route-3", 
     lat: 31.300212713290744, lng: 76.0800463263626,
     status: "active",
     speed: 45,
-    driver: "Deepak Rawat",
+    driver: "Amanjeet Singh",
     nextStop: "Doiwala",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 40,
     occupancy: 25,
-    fare: { baseFare: 15, perKmRate: 3 }
+    fare: { baseFare: 10, perKmRate: 2 }
   },
   {
     id: "bus-7",
-    name: "University Link",
+    name: "Punjab Parindey",
     code: "DH-04-A",
     routeId: "route-4",
     lat: 30.90880861979299, lng: 75.60524803079197,
@@ -235,55 +248,59 @@ export const dehradunBuses: Bus[] = [
     speed: 25,
     driver: "Vinod Kumar",
     nextStop: "Kaulagarh",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 35,
     occupancy: 20,
-    fare: { baseFare: 8, perKmRate: 1.5 }
+    fare: { baseFare: 10, perKmRate: 2 }
   },
   {
     id: "bus-8",
-    name: "Campus Connect",
+    name: "Punjab Seva",
     code: "DH-04-B",
     routeId: "route-4",
     lat: 31.22879382502805, lng: 75.77111028295566,
     status: "delayed",
     speed: 10,
-    driver: "Ramesh Pant",
+    driver: "Baldev Singh",
     nextStop: "Dehradun University",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 35,
     occupancy: 30,
-    fare: { baseFare: 8, perKmRate: 1.5 }
+    fare: { baseFare: 10, perKmRate: 2 }
   },
   {
     id: "bus-9",
-    name: "ONGC Special",
+    name: "Shandaar Sawaari",
     code: "DH-05-A",
     routeId: "route-5",
     lat: 30.721323552507325, lng: 76.79138235819211,
     status: "active",
     speed: 30,
-    driver: "Anil Bisht", 
+    driver: "Anil Singh", 
     nextStop: "Nehru Colony",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 40,
     occupancy: 15,
-    fare: { baseFare: 12, perKmRate: 2 }
+    fare: { baseFare: 10, perKmRate: 2 }
   },
   {
     id: "bus-10",
-    name: "Corporate Shuttle",
+    name: "Punjab Pheri",
     code: "DH-05-B",
     routeId: "route-5",
     lat: 30.81320424216226, lng: 76.34786620922758,
     status: "active",
     speed: 40,
-    driver: "Ravi Chauhan",
+    driver: "Ravi Chadda",
     nextStop: "ONGC",
+    arrival: "11Pm",
     lastUpdated: new Date(),
     capacity: 40,
     occupancy: 35,
-    fare: { baseFare: 12, perKmRate: 2 }
+    fare: { baseFare: 10, perKmRate: 2 }
   }
 ];
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { RefreshCw, MapPin, Bus, Navigation } from 'lucide-react';
+import { RefreshCw, MapPin, Bus, Navigation, Megaphone } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import BusMap from '@/components/BusMap';
 import RouteSidebar from '@/components/RouteSidebar';
@@ -24,6 +24,7 @@ const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showFareCalculator, setShowFareCalculator] = useState(false);
+  const [showAnnouncements, setShowAnnouncements] = useState(false); // New state for announcements
 
   const handleBusClick = (bus: BusType) => {
     setSelectedBus(bus.id);
@@ -68,7 +69,7 @@ const Index = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent">
-                {t('smart_bus_tracker')}
+                {t('SAARTHI')}
               </h1>
               <p className="text-sm text-muted-foreground">
                 {t('real_time_tracking')}
@@ -85,6 +86,17 @@ const Index = () => {
               className="hover-lift"
             >
               {showFareCalculator ? 'Hide Calculator' : 'Fare Calculator'}
+            </Button>
+            
+            {/* Announcements Toggle */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowAnnouncements(!showAnnouncements)}
+              className="hover-lift"
+            >
+              <Megaphone className="h-4 w-4 mr-2" />
+              {showAnnouncements ? 'Hide Announcements' : 'Announcements'}
             </Button>
 
             {/* Refresh Button */}
@@ -140,15 +152,22 @@ const Index = () => {
             buses={buses} // Pass live updating buses
           />
 
-          {/* Fare Calculator Overlay - moved to avoid clashing */}
+          {/* Fare Calculator Overlay */}
           {showFareCalculator && (
             <div className="absolute top-20 left-4 z-[1000] w-80 lg:w-96">
               <FareCalculator />
             </div>
           )}
 
-          {/* Selected Bus Info - moved to avoid clashing with calculator */}
-          {selectedBusData && !showFareCalculator && (
+          {/* Announcements Panel - Conditionally rendered based on showAnnouncements state */}
+          {showAnnouncements && (
+            <div className="absolute top-20 right-4 z-[1000] w-72 lg:w-80">
+              <AnnouncementPanel selectedRoute={selectedRoute} />
+            </div>
+          )}
+
+          {/* Selected Bus Info */}
+          {selectedBusData && !showFareCalculator && !showAnnouncements && (
             <div className="absolute top-4 right-4 z-[1000] w-80">
               <Card className="glass">
                 <CardContent className="p-4 space-y-3">
@@ -158,9 +177,9 @@ const Index = () => {
                       {selectedBusData.code}
                     </Badge>
                   </div>
-                  
+                 
                   <SeatAvailability bus={selectedBusData} />
-                  
+                 
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <div>
                       <span className="font-medium">{t('driver')}:</span>
@@ -170,9 +189,13 @@ const Index = () => {
                       <span className="font-medium">{t('speed')}:</span>
                       <p>{selectedBusData.speed} {t('kmh')}</p>
                     </div>
-                    <div className="col-span-2">
+                    <div >
                       <span className="font-medium">{t('next_stop')}:</span>
                       <p>{selectedBusData.nextStop}</p>
+                    </div>
+                    <div>
+                      <span className="font-medium">{t('Arrival Time')}:</span>
+                      <p>{selectedBusData.arrival}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -180,19 +203,14 @@ const Index = () => {
             </div>
           )}
 
-          {/* Announcements Panel - repositioned */}
-          <div className="absolute bottom-4 right-4 z-[1000] w-72 lg:w-80">
-            <AnnouncementPanel selectedRoute={selectedRoute} />
-          </div>
-
           {/* Floating Action Buttons */}
-          <div className="absolute bottom-6 left-6 z-[1000] space-y-3">
+          <div className="absolute bottom-0 left-0 z-[-1] space-y-3">
             {/* Quick Stats Card */}
             <div className="glass p-4 rounded-xl animate-float">
               <div className="text-center">
                 <p className="text-2xl font-bold text-primary">
-                  {selectedRoute ? 
-                    (selectedRoute.split('-')[1] ? `Route ${selectedRoute.split('-')[1]}` : 'Route') 
+                  {selectedRoute ?
+                    (selectedRoute.split('-')[1] ? `Route ${selectedRoute.split('-')[1]}` : 'Route')
                     : '10'
                   }
                 </p>
@@ -253,5 +271,6 @@ const Index = () => {
     </div>
   );
 };
+
 
 export default Index;
