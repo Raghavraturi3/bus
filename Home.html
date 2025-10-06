@@ -1,24 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Punjab Bus Pulse - Real-time Bus Tracking</title>
-    <meta name="description" content="Real-time bus tracking system for Dehradun city. Track buses, view routes, and get live updates on public transportation." />
-    <meta name="author" content="Dehradun Transport Authority" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Bus Tracking</title>
+  <link rel="stylesheet" href="styles/background.css">
+  <link rel="stylesheet" href="styles/login.css">
+  <link rel="stylesheet" href="styles/switch.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body> 
+      <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-bus"></i>
+                SAARTHI
+            </div>
+            <nav>
+                <ul>
+                   <li><a href="http://localhost:4173/"><button class="button">Launch Dashboard</button></a></li>
+                    <li><a class="open-btn" id="openLogin" style="color:#0b3d91;"><button style="background:  linear-gradient(90deg,#395aea, #7f3bea); color:white; width:200px; height:40px; border:none; border-radius:5px; font-size:1.3rem;">Sign up</button></a></li>
+                          <!-- trigger -->
 
-    <meta property="og:title" content="Dehradun Bus Pulse - Real-time Bus Tracking" />
-    <meta property="og:description" content="Track buses in real-time across Dehradun city. View routes, bus locations, and get live transportation updates." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+                </ul>
+            </nav>
+        </div>
+      <!------------------------login box------------------------------------>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
 
-<body>
-   <div id="root"></div>
- <script type="module" src="/src/main.tsx"></script> 
-</body> 
+<!-- overlay + popup -->
+<div class="overlay" id="overlay" aria-hidden="true" role="dialog" aria-label="Login dialog">
+  <div class="login-card" role="document">
+
+    <div class="login-top">
+      <button class="close-x" id="closeBtn" aria-label="Close popup">&times;</button>
+
+      <div class="avatar-wrap" title="User photo">
+        <!-- Placeholder SVG image (change src to your image) -->
+        <img id="avatarImg" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><rect fill="%23ffffff" width="100%" height="100%"/><g><circle cx="100" cy="70" r="40" fill="%23c7d2fe"/><rect x="40" y="120" width="120" height="40" rx="18" fill="%23e0e7ff"/></g></svg>' alt="User photo">
+      </div>
+
+      <div class="login-title">Welcome Back</div>
+      <div class="login-sub">Sign in to continue to your account</div>
+    </div>
+
+    <div class="login-body">
+      <form class="form" id="loginForm" onsubmit="return false;">
+        <div class="input">
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="Enter username" autocomplete="username" required>
+        </div>
+
+        <div class="input">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter password" autocomplete="current-password" required>
+        </div>
+
+        <div class="actions">
+          <button class="btn button-primary" id="loginBtn" type="submit">Login</button>
+          <button class="btn btn-ghost" id="cancelBtn" type="button">Cancel</button>
+        </div>
+
+        <div style="margin-top:10px; display:flex; justify-content:center;">
+          <div class="small">Forgot password? <a href="#" style="color: #0b3d91; text-decoration:none;">Reset</a></div>
+        </div>
+        <hr>
+       <h3 style="color:black; display:flex; justify-content: center;">OR</h3>
+        <div style="margin-top:10px; display:flex; justify-content:center;">
+        <div class="small"><a href="create_Account.html" style="color:#0b3d91; text-decoration:none; font-size:1rem ;">Or create Account</a></div>
+        </div>
+      </form>
+    </div>
+    <!--------------------end of login box code ------------------------------------->
+      </header>
+       <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">Smart Bus Tracking</h1>
+            <p class="hero-subtitle">Real-time bus locations, seat availability, fare calculator, and multi-language support across Ludhiana, Amritsar, Jalandhar, Patiala, Bathinda, Hoshiarpur, and Moga.</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 style="color:#16a34a;">5</h3>
+                    <p>Active Buses</p>
+                </div>
+                <div class="stat-card">
+                    <h3 style="color:#3369eb;">16</h3>
+                    <p>Total Routes</p>
+                </div>
+                <div class="stat-card">
+                    <h3 style="color:#9333ea;">7</h3>
+                    <p>Cities Covered</p>
+                </div>
+                <div class="stat-card">
+                    <h3 style="color:#ea5c16;">65%</h3>
+                    <p>Avg Occupancy</p>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="http://localhost:8080/#" class="btn btn-primary">View Live Map →</a>
+                <a href="#" class="btn btn-secondary">★ Learn More</a>
+            </div>
+        </div>
+    </header>
+
+<section class="features">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Features</h2>
+            <p class="section-subtitle">Everything you need for smart bus travel</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="card-header">
+                       <div class="feature-icon">
+                       <i class="fas fa-map-marker-alt"></i>
+                       </div>
+                        <h3>Punjab Smart Bus</h3>
+                    </div>
+                    <p>Know real-time bus locations and amenity details and traffic overlay</p>
+                </div>
+                <div class="feature-card">
+                    <div class="card-header">
+                       <div class="feature-icon">
+                    <i class="fas fa-language"></i>
+                  </div>
+                        <h3>Multi-Language</h3>
+                    </div>
+                    <p>Live support for English, Hindi, and Punjabi languages</p>
+                </div>
+                 <div class="feature-card">
+                    <div class="card-header">
+                        <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                        <h3>Safety Features</h3>
+                    </div>
+                    <p>SOS button, driver profiles, and location sharing.</p>
+                </div>
+                 <div class="feature-card">
+                    <div class="card-header">
+                        <div class="feature-icon">
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+                        <h3>Live Battery Levels</h3>
+                    </div>
+                    <p>Real-time monitoring of electric bus battery levels.</p>
+                </div>
+                 <div class="feature-card">
+                    <div class="card-header">
+                        <div class="feature-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                        <h3>Fare Calculator</h3>
+                    </div>
+                    <p>Calculate exact fares between any two stops.</p>
+                </div>
+                 <div class="feature-card">
+                    <div class="card-header">
+                        <div class="feature-icon">
+                          <i class="fas fa-award"></i>
+                          </div>
+                        <h3>Loyalty Program</h3>
+                    </div>
+                    <p>Earn points, badges, and rewards for regular travel.</p>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section class="cities">
+        <div class="container">
+            <h2 class="section-title">Punjab Tier-2 Cities Coverage</h2>
+            <div class="cities-grid">
+                <div class="city-card">
+                  <h1 style="color:#3369eb;">5+</h1>  
+                  <h3>Ludhiana</h3>
+                  <p>Route</p> 
+                    
+                </div>
+                
+                <div class="city-card">
+                  <h1 style="color:#3369eb;">3+</h1>  
+                  <h3>Amritsar</h3>
+                  <p>Route</p> 
+                </div>
+                
+                <div class="city-card">
+                   <h1 style="color:#3369eb;">2+</h1> 
+                  <h3>Jalandhar</h3>
+                  <p>Route</p>   
+                </div>
+                
+                <div class="city-card">
+                    <h1 style="color:#3369eb;">2+</h1>
+                    <h3>Patiala</h3>
+                    <p>Route</p> 
+                </div>
+                
+                <div class="city-card">
+                  <h1 style="color:#3369eb;">2+</h1>  
+                  <h3>Bathinda</h3> 
+                  <p>Route</p> 
+                </div>
+                
+                <div class="city-card">
+                  <h1 style="color:#3369eb;">1+</h1> 
+                  <h3>Hoshiapur</h3>
+                  <p>Route</p> 
+                </div>
+                
+
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h1 class="cta-title">Ready to Transform Your Commute?</h1>
+            <p class="cta-subtitle">Join thousands of daily commuters who save time and travel smarter with Punjab Smart Bus Tracker</p>
+          <button><a href="Index.html" class="btn btn-cta" style="color:white; padding:10px;"><h2>→ Start Tracking Now </h2></a></button>
+        </div>
+    </section>
+</header>
+   <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">Punjab Smart Bus Tracker</div>
+            <p class="footer-text">Real-time bus tracking • Multi-language support • Smart features</p>
+            <div class="copyright">
+                &copy; 2025 Punjab Smart Bus Tracker. All rights reserved.
+            </div>
+        </div>
+    </footer>
+<script src="script/login.js"></script>
+<script src="script/switch.js"></script>
+  
+
+</body>
 </html>
